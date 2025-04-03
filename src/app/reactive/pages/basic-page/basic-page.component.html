@@ -16,11 +16,13 @@
                            placeholder="Nombre del producto"
                            formControlName="name"
                            >
-
-                    <span class="form-text text-danger">
-                        <!-- Debe de ser de 3 letras -->
-                        error message
-                    </span>
+                    @if( isValidField('name') ){
+                      <span class="form-text text-danger">
+                          <!-- Debe de ser de 3 letras -->
+                          <!-- error message debe de ser de 3 letras en adelante -->
+                          {{ getFieldError('name') }}
+                      </span>
+                    }
                 </div>
             </div>
 
@@ -33,9 +35,12 @@
                            placeholder="Precio del producto"
                            formControlName="price"
                            >
+                  @if( isValidField('price') ){
                     <span class="form-text text-danger">
-                        El precio debe de ser 0 o mayor
+                       <!--  El precio debe de ser 0 o mayor que 10 -->
+                       {{ getFieldError('price') }}
                     </span>
+                  }
                 </div>
             </div>
 
@@ -46,12 +51,14 @@
                     <input type="number"
                            class="form-control"
                            placeholder="Existencias del producto"
-                           formControlName="isStoraged"
+                           formControlName="isStorage"
                            >
-
+                  @if( isValidField('isStorage') ){
                     <span class="form-text text-danger">
-                         Las existencias deben de ser 0 o mayor
+                         <!-- Las existencias deben de ser 0 o mayor que 10 -->
+                         {{ getFieldError('isStorage') }}
                     </span>
+                  }
                 </div>
             </div>
 
@@ -90,10 +97,15 @@
         <span>Value</span>
         <pre>{{ myForm.value | json }}</pre>
 
+        <span>Errores</span>
+        <pre>{{ myForm.controls['name'].errors | json }}</pre>
+        <pre>{{ myForm.controls['price'].errors | json }}</pre>
+        <pre>{{ myForm.controls['isStorage'].errors | json }}</pre>
+
         <span>Precio</span>
-        <pre>{{ myForm.controls.price.value | json }}</pre>
+        <pre>{{ myForm.controls['price'].value | json }}</pre>
 
         <span>Producto</span>
-        <pre>{{ myForm.controls.name.value | json }}</pre>
+        <pre>{{ myForm.controls['name'].value | json }}</pre>
     </div>
 </div>
